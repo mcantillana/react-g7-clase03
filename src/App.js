@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import axios from 'axios';
+import Home from './views/Home';
+import Contact from './views/Contact';
+import store from './store/store';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const {Provider} = store;
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: 'Chanchito Feliz',
+            data : {
+                age: 'asd',
+                race: 'asd',
+                color: 'asd',
+            }
+        }
+    }
+
+
+    render() {
+        return (
+            <Provider value={this.state}>
+            
+              <BrowserRouter>
+                  <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/contact" component={Contact} />
+                  </Switch>
+              </BrowserRouter>
+            </Provider>
+        );
+    }
 }
+
 
 export default App;
